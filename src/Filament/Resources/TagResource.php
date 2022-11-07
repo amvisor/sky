@@ -8,8 +8,8 @@ use Filament\Forms\Components\TextInput;
 use Filament\Resources\Form;
 use Filament\Resources\Table;
 use Filament\Tables\Columns\TextColumn;
-use Illuminate\Support\Str;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Str;
 use LaraZeus\Sky\Filament\Resources\TagResource\Pages;
 use LaraZeus\Sky\Models\Tag;
 
@@ -36,27 +36,27 @@ class TagResource extends SkyResource
         return $form
             ->schema(
                 [
-                TextInput::make('name')
-                    ->required()
-                    ->maxLength(255)
-                    ->label(__('Tag.Name'))
-                    ->reactive()
-                    ->afterStateUpdated(
-                        function (Closure $set, $state) {
-                            $set('slug', Str::slug($state));
-                        }
-                    ),
-                TextInput::make('slug')
-                    ->unique(ignorable: fn (?Model $record): ?Model => $record)
-                    ->required()
-                    ->maxLength(255),
-                Select::make('type')
-                    ->options(
-                        [
-                        'tag' => 'Tag',
-                        'category' => 'Category',
-                        ]
-                    ),
+                    TextInput::make('name')
+                        ->required()
+                        ->maxLength(255)
+                        ->label(__('Tag.Name'))
+                        ->reactive()
+                        ->afterStateUpdated(
+                            function (Closure $set, $state) {
+                                $set('slug', Str::slug($state));
+                            }
+                        ),
+                    TextInput::make('slug')
+                        ->unique(ignorable: fn (?Model $record): ?Model => $record)
+                        ->required()
+                        ->maxLength(255),
+                    Select::make('type')
+                        ->options(
+                            [
+                                'tag' => 'Tag',
+                                'category' => 'Category',
+                            ]
+                        ),
                 ]
             );
     }
@@ -66,10 +66,10 @@ class TagResource extends SkyResource
         return $table
             ->columns(
                 [
-                TextColumn::make('name'),
-                TextColumn::make('type'),
-                TextColumn::make('slug'),
-                TextColumn::make('posts_count')->counts('posts'),
+                    TextColumn::make('name'),
+                    TextColumn::make('type'),
+                    TextColumn::make('slug'),
+                    TextColumn::make('posts_count')->counts('posts'),
                 ]
             );
     }

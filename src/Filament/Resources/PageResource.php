@@ -18,8 +18,8 @@ use Filament\Tables\Columns\ViewColumn;
 use Filament\Tables\Filters\Filter;
 use Filament\Tables\Filters\MultiSelectFilter;
 use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Support\Str;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Str;
 use LaraZeus\Sky\Filament\Resources\PageResource\Pages;
 use LaraZeus\Sky\Models\Post;
 use LaraZeus\Sky\Models\PostStatus;
@@ -43,101 +43,101 @@ class PageResource extends SkyResource
         return $form
             ->schema(
                 [
-                Grid::make()->schema(
-                    [
-                    Card::make()->schema(
+                    Grid::make()->schema(
                         [
-                        TextInput::make('title')
-                            ->label(__('Post Title'))
-                            ->required()
-                            ->maxLength(255)
-                            ->reactive()
-                            ->afterStateUpdated(
-                                function (Closure $set, $state) {
-                                    $set('slug', Str::slug($state));
-                                }
+                            Card::make()->schema(
+                                [
+                                    TextInput::make('title')
+                                        ->label(__('Post Title'))
+                                        ->required()
+                                        ->maxLength(255)
+                                        ->reactive()
+                                        ->afterStateUpdated(
+                                            function (Closure $set, $state) {
+                                                $set('slug', Str::slug($state));
+                                            }
+                                        ),
+
+                                    TinyEditor::make('content')
+                                        ->label(__('Post Content'))
+                                        ->showMenuBar()
+                                        ->required(),
+                                ]
                             ),
-
-                        TinyEditor::make('content')
-                            ->label(__('Post Content'))
-                            ->showMenuBar()
-                            ->required(),
                         ]
-                    ),
-                    ]
-                )
-                    ->columnSpan(3),
+                    )
+                        ->columnSpan(3),
 
-                Grid::make()->schema(
-                    [
-                    Section::make(__('SEO'))
-                        ->description(__('SEO Settings'))->schema(
-                            [
-                            Hidden::make('user_id')
-                                ->required()
-                                ->default(auth()->user()->id),
+                    Grid::make()->schema(
+                        [
+                            Section::make(__('SEO'))
+                                ->description(__('SEO Settings'))->schema(
+                                    [
+                                        Hidden::make('user_id')
+                                            ->required()
+                                            ->default(auth()->user()->id),
 
-                            Hidden::make('post_type')
-                                ->default('page')
-                                ->required(),
+                                        Hidden::make('post_type')
+                                            ->default('page')
+                                            ->required(),
 
-                            Textarea::make('description')
-                                ->maxLength(255)
-                                ->label(__('Description'))
-                                ->hint(__('Write an excerpt for your post')),
+                                        Textarea::make('description')
+                                            ->maxLength(255)
+                                            ->label(__('Description'))
+                                            ->hint(__('Write an excerpt for your post')),
 
-                            TextInput::make('slug')
-                                ->unique(ignorable: fn (?Model $record): ?Model => $record)
-                                ->required()
-                                ->maxLength(255)
-                                ->label(__('Post Slug')),
+                                        TextInput::make('slug')
+                                            ->unique(ignorable: fn (?Model $record): ?Model => $record)
+                                            ->required()
+                                            ->maxLength(255)
+                                            ->label(__('Post Slug')),
 
-                            Select::make('parent_id')
-                                ->options(Post::wherePostType('page')->pluck('title', 'id'))
-                                ->label(__('Parent Page')),
+                                        Select::make('parent_id')
+                                            ->options(Post::wherePostType('page')->pluck('title', 'id'))
+                                            ->label(__('Parent Page')),
 
-                            TextInput::make('ordering')
-                                ->integer()
-                                ->label(__('Page Order'))
-                                ->default(1),
-                            ]
-                        )
-                        ->collapsible(),
+                                        TextInput::make('ordering')
+                                            ->integer()
+                                            ->label(__('Page Order'))
+                                            ->default(1),
+                                    ]
+                                )
+                                ->collapsible(),
 
-                    Section::make(__('visibility'))
-                        ->description(__('Visibility Options'))
-                        ->schema(
-                            [
-                            Select::make('status')
-                                ->label(__('status'))
-                                ->default('publish')
-                                ->required()
-                                ->reactive()
-                                ->options(PostStatus::pluck('label', 'name')),
+                            Section::make(__('visibility'))
+                                ->description(__('Visibility Options'))
+                                ->schema(
+                                    [
+                                        Select::make('status')
+                                            ->label(__('status'))
+                                            ->default('publish')
+                                            ->required()
+                                            ->reactive()
+                                            ->options(PostStatus::pluck('label', 'name')),
 
-                            TextInput::make('password')
-                                ->label(__('Password'))
-                                ->reactive()
-                                ->visible(fn (Closure $get): bool => $get('status') === 'private'),
+                                        TextInput::make('password')
+                                            ->label(__('Password'))
+                                            ->reactive()
+                                            ->visible(fn (Closure $get): bool => $get('status') === 'private'),
 
-                            DateTimePicker::make('published_at')
-                                ->label(__('published at'))
-                                ->default(now()),
-                            ]
-                        )
-                        ->collapsible(),
+                                        DateTimePicker::make('published_at')
+                                            ->label(__('published at'))
+                                            ->default(now()),
+                                    ]
+                                )
+                                ->collapsible(),
 
-                    Section::make(__('Featured Image'))
-                        ->schema(
-                            [
-                            SpatieMediaLibraryFileUpload::make('featured_image')
-                                ->collection('pages')
-                                ->label(''),
-                            ]
-                        )
-                        ->collapsible(),
-                    ]
-                )->columnSpan(1),
+                            Section::make(__('Featured Image'))
+                                ->schema(
+                                    [
+                                        SpatieMediaLibraryFileUpload::make('featured_image')
+                                            ->collection('pages')
+                                            ->label(''),
+                                    ]
+                                )
+                                ->collapsible(),
+                        ]
+                    )->columnSpan(1),
                 ]
             )->columns(4);
     }
@@ -147,30 +147,30 @@ class PageResource extends SkyResource
         return $table
             ->columns(
                 [
-                ViewColumn::make('title_card')
-                    ->label(__('Title'))
-                    ->sortable(['title'])
-                    ->searchable(['title'])
-                    ->view('zeus-sky::filament.columns.page-title'),
+                    ViewColumn::make('title_card')
+                        ->label(__('Title'))
+                        ->sortable(['title'])
+                        ->searchable(['title'])
+                        ->view('zeus-sky::filament.columns.page-title'),
 
-                ViewColumn::make('status_desc')
-                    ->label(__('Status'))
-                    ->sortable(['status'])
-                    ->searchable(['status'])
-                    ->view('zeus-sky::filament.columns.status-desc')
-                    ->tooltip(fn (Post $record): string => $record->published_at->format('Y/m/d | H:i A')),
+                    ViewColumn::make('status_desc')
+                        ->label(__('Status'))
+                        ->sortable(['status'])
+                        ->searchable(['status'])
+                        ->view('zeus-sky::filament.columns.status-desc')
+                        ->tooltip(fn (Post $record): string => $record->published_at->format('Y/m/d | H:i A')),
                 ]
             )
             ->defaultSort('id', 'desc')
             ->filters(
                 [
-                MultiSelectFilter::make('status')
-                    ->label(__('Status'))
-                    ->options(PostStatus::pluck('label', 'name')),
+                    MultiSelectFilter::make('status')
+                        ->label(__('Status'))
+                        ->options(PostStatus::pluck('label', 'name')),
 
-                Filter::make('password')
-                    ->label(__('Password Protected'))
-                    ->query(fn (Builder $query): Builder => $query->whereNotNull('password')),
+                    Filter::make('password')
+                        ->label(__('Password Protected'))
+                        ->query(fn (Builder $query): Builder => $query->whereNotNull('password')),
                 ]
             );
     }

@@ -46,17 +46,17 @@ class FaqResource extends SkyResource
         return $form
             ->schema(
                 [
-                Textarea::make('question')
-                    ->label(__('Question'))
-                    ->required()
-                    ->maxLength(65535)
-                    ->columnSpan(2),
+                    Textarea::make('question')
+                        ->label(__('Question'))
+                        ->required()
+                        ->maxLength(65535)
+                        ->columnSpan(2),
 
-                RichEditor::make('answer')
-                    ->label(__('Answer'))
-                    ->required()
-                    ->maxLength(65535)
-                    ->columnSpan(2),
+                    RichEditor::make('answer')
+                        ->label(__('Answer'))
+                        ->required()
+                        ->maxLength(65535)
+                        ->columnSpan(2),
                 ]
             );
     }
@@ -66,7 +66,7 @@ class FaqResource extends SkyResource
         return $table
             ->columns(
                 [
-                TextColumn::make('question'),
+                    TextColumn::make('question'),
                 ]
             );
     }

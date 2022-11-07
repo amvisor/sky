@@ -32,11 +32,11 @@ class Page extends Component
         return view(app('theme') . '.page')
             ->with(
                 [
-                'post' => $this->page,
-                /**
-                * @phpstan-ignore-next-line
-                */
-                'children' => Post::with('parent')->where('parent_id', $this->page->id)->get(),
+                    'post' => $this->page,
+                    /**
+                     * @phpstan-ignore-next-line
+                     */
+                    'children' => Post::with('parent')->where('parent_id', $this->page->id)->get(),
                 ]
             )
             ->layout(config('zeus-sky.layout'));

@@ -2,10 +2,10 @@
 
 namespace LaraZeus\Sky\Models;
 
-use LaraZeus\Sky\Factories\PostFactory;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Blade;
+use LaraZeus\Sky\Factories\PostFactory;
 use Spatie\MediaLibrary\HasMedia;
 use Spatie\MediaLibrary\InteractsWithMedia;
 use Spatie\Tags\HasTags;
@@ -20,30 +20,30 @@ class Post extends Model implements HasMedia
     use HasTranslations;
 
     public $translatable = [
-    'title',
-    'content',
-    'description',
+        'title',
+        'content',
+        'description',
     ];
 
     protected $fillable = [
-    'title',
-    'slug',
-    'description',
-    'post_type',
-    'content',
-    'user_id',
-    'parent_id',
-    'featured_image',
-    'published_at',
-    'sticky_until',
-    'password',
-    'ordering',
-    'status',
+        'title',
+        'slug',
+        'description',
+        'post_type',
+        'content',
+        'user_id',
+        'parent_id',
+        'featured_image',
+        'published_at',
+        'sticky_until',
+        'password',
+        'ordering',
+        'status',
     ];
 
     protected $casts = [
-    'published_at' => 'datetime',
-    'sticky_until' => 'datetime',
+        'published_at' => 'datetime',
+        'sticky_until' => 'datetime',
     ];
 
     protected static function newFactory(): PostFactory

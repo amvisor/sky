@@ -36,7 +36,7 @@ class Tags extends Component
         return view(app('theme') . '.category')
             ->with(
                 [
-                'posts' => $this->tag->postsPublished,
+                    'posts' => $this->tag->postsPublished,
                 ]
             )
             ->layout(config('zeus-sky.layout'));
